@@ -79,11 +79,43 @@ $table_prefix  = 'wp_';
  */
 define('WP_DEBUG', false);
 
+/**
+ * Performance Optimization Settings
+ * Enable various performance optimizations
+ */
+
+// Memory settings
+define('WP_MEMORY_LIMIT', '256M');
+define('WP_MAX_MEMORY_LIMIT', '512M');
+
+// Reduce post revisions
+define('WP_POST_REVISIONS', 5);
+
+// Increase autosave interval (in seconds)
+define('AUTOSAVE_INTERVAL', 120);
+
+// Disable file editing in admin for security and performance
+define('DISALLOW_FILE_EDIT', true);
+
+// Enable object caching
+define('WP_CACHE', true);
+
+// Disable WordPress cron and use server cron instead
+define('DISABLE_WP_CRON', true);
+
+// Optimize database
+define('SAVEQUERIES', false);
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
+
+/** Load performance optimizations */
+if (file_exists(ABSPATH . 'wp-content/performance-loader.php')) {
+    require_once(ABSPATH . 'wp-content/performance-loader.php');
+}
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
